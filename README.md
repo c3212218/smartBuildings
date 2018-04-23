@@ -11,7 +11,10 @@ The code for Flume configuration agents is in the folder 'flume_conf_files'. The
 The Pyspark code is in the folder 'pyspark_code'. This code reads the IoT sensor data being stored in HDFS. Make sure that the pyspark code is running before starting the Python IoT sensor application.
 
 ## Elasticsearch and Kibana
-Elasticsearch and Kibana were downloaded from web onto the Cloudera VM where these services were started. Elasticsearch and Kibana can both be downloaded from the website and while working in Cloudera VM, they just need to be extracted out of the zip files and they should be ready to use. Make sure that Elasticsearch and Kibana are running before starting the Python IoT sensor Application.
+Elasticsearch and Kibana were downloaded from web onto the Cloudera VM where these services were started. Elasticsearch and Kibana can both be downloaded from the website and while working in Cloudera VM, they just need to be extracted out of the zip files and they should be ready to use. Make sure that Elasticsearch and Kibana are running before starting the Python IoT sensor Application. For Elasticsearch we installed kopf plugin as we found it very convenient to look at the indeces and documents within indeces in Elasticsearch. Since the Python IoT sensor application sends the data to Elasticsearch in near-real time, we used this plugin for debugging as we could see documents being uploaded into indeces in near-real time.
+The kopf plugin can be found here:
+https://github.com/lmenezes/elasticsearch-kopf
+
 
 
 
