@@ -17,9 +17,9 @@ s.connect((TCP_IP, TCP_PORT))                                   # Connect to the
 class Parking:
     id = 401                                      # Initialize sensor id
     value = 1.00                                # Initialize sensor value
-    postcode = 2000                             # Initialize sensor postcode
+    location = 401                             # Initialize sensor location
     def description(self):
-        desc_str = "The value of sensor %d is %.2f and has a postcode %d." % (self.id, self.value, self.postcode)
+        desc_str = "The value of sensor %d is %.2f and has a location %d." % (self.id, self.value, self.location)
         return desc_str
 
 # Initialize sensor class
@@ -28,7 +28,7 @@ sensor = Parking()
 # Define and initialize variables
 sensor.value = 0
 sensor.id = 401
-sensor.postcode = 2000
+sensor.location = 401
 
 # Start generating random values for the sensor class
 while(1):
@@ -44,23 +44,23 @@ while(1):
       s.send(",")                                   # Send a comma to separate id and value
       m = str(sensor.value).encode()                # Convert sensor value to string so it can be sent to TCP connection
       s.send(m)                                     # Send the id on the TCP connection
-      s.send(",")                                   # Send a comma to separate value and postcode
-      k = str(sensor.postcode).encode()             # Convert sensor postcode to string so it can be sent to TCP connection
-      s.send(k)                                     # Send the postcode on the TCP connection
+      s.send(",")                                   # Send a comma to separate value and location
+      k = str(sensor.location).encode()             # Convert sensor location to string so it can be sent to TCP connection
+      s.send(k)                                     # Send the location on the TCP connection
       s.send("\n")                                  # Send a newline character so the next set of values be printed on next line
       sensor.id = sensor.id+1                       # Increment the sensor id by 1
-      sensor.postcode = sensor.postcode+1           # Increment the sensor postcode by 1
+      sensor.location = sensor.location+1           # Increment the sensor location by 1
       time.sleep(1)                                 # Wait for 1 second to generate next value
       # Create a document to be sent to elasticsearch
       doc = {
           'sensorid': sensor.id,
           'value': sensor.value,
-          'postcode': sensor.postcode,
+          'location': sensor.location,
           'timestamp': datetime.datetime.now(),
       }
       res = es.index(index="iot", doc_type='smart_building', body=doc)   # Index the document in elasticsearch
       print(res['created'])                                          # Print if indexed successfully
-      if(sensor.id==501):                           # Reset the sensor id and postcode when it reaches 100 sensors
+      if(sensor.id==501):                           # Reset the sensor id and location when it reaches 100 sensors
             sensor.id = 401                           # Reset sensor id
-            sensor.postcode = 2000                  # Reset sensor postcode
+            sensor.location = 401                  # Reset sensor location
 s.close()
