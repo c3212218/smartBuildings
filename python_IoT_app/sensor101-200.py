@@ -7,7 +7,7 @@ from elasticsearch import Elasticsearch     # import elasticsearch module
 es = Elasticsearch()
 
 TCP_IP = '127.0.0.1'        # Define the TCP IP
-TCP_PORT = 5005             # Define the TCP Port
+TCP_PORT = 5006             # Define the TCP Port
 BUFFER_SIZE = 500
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)           # Create an INET streaming socket
@@ -15,11 +15,11 @@ s.connect((TCP_IP, TCP_PORT))                                   # Connect to the
 
 # define the Sensor class
 class Oxygen:
-    id = 1                                      # Initialize sensor id
+    id = 101                                      # Initialize sensor id
     value = 1.00                                # Initialize sensor value
-    location = 1                             # Initialize sensor location
+    postcode = 101                             # Initialize sensor postcode
     def description(self):
-        desc_str = "The value of sensor %d is %.2f and has a location %d." % (self.id, self.value, self.location)
+        desc_str = "The value of sensor %d is %.2f and has a postcode %d." % (self.id, self.value, self.postcode)
         return desc_str
 
 # Initialize sensor class
@@ -27,8 +27,8 @@ sensor = Oxygen()
 
 # Define and initialize variables
 sensor.value = 0
-sensor.id = 1
-sensor.location = 1
+sensor.id = 101
+sensor.location = 101
 
 # Start generating random values for the sensor class
 while(1):
@@ -60,7 +60,7 @@ while(1):
       }
       res = es.index(index="iot", doc_type='smart_building', body=doc)   # Index the document in elasticsearch
       print(res['created'])                                          # Print if indexed successfully
-      if(sensor.id==101):                           # Reset the sensor id and location when it reaches 100 sensors
-            sensor.id = 1                           # Reset sensor id
-            sensor.location = 1                  # Reset sensor location
+      if(sensor.id==201):                           # Reset the sensor id and location when it reaches 100 sensors
+            sensor.id = 101                           # Reset sensor id
+            sensor.location = 101                  # Reset sensor location
 s.close()

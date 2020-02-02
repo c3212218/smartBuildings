@@ -7,28 +7,28 @@ from elasticsearch import Elasticsearch     # import elasticsearch module
 es = Elasticsearch()
 
 TCP_IP = '127.0.0.1'        # Define the TCP IP
-TCP_PORT = 5005             # Define the TCP Port
+TCP_PORT = 5007             # Define the TCP Port
 BUFFER_SIZE = 500
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)           # Create an INET streaming socket
 s.connect((TCP_IP, TCP_PORT))                                   # Connect to the server on TCP_PORT
 
 # define the Sensor class
-class Oxygen:
-    id = 1                                      # Initialize sensor id
+class Smoke:
+    id = 201                                      # Initialize sensor id
     value = 1.00                                # Initialize sensor value
-    location = 1                             # Initialize sensor location
+    location = 201                             # Initialize sensor location
     def description(self):
         desc_str = "The value of sensor %d is %.2f and has a location %d." % (self.id, self.value, self.location)
         return desc_str
 
 # Initialize sensor class
-sensor = Oxygen()
+sensor = Smoke()
 
 # Define and initialize variables
 sensor.value = 0
-sensor.id = 1
-sensor.location = 1
+sensor.id = 201
+sensor.location = 201
 
 # Start generating random values for the sensor class
 while(1):
@@ -37,7 +37,7 @@ while(1):
 # sensors 400-600 are Parking space sensors
 # sensors 600- 800 are Luminosity sensors
 # sensors 800-1000 are Garbage sensors
-      sensor.value = (random.randint(8,21))         # Generate the values for Oxygen in the range from 8 to 21
+      sensor.value = (random.randint(8,21))         # Generate the values for Smoke in the range from 8 to 21
       t = str(sensor.id).encode()                   # Convert the id to string so it can be sent to the TCP connection
       print (sensor.id)                             # Print the sensor id
       s.send(t)                                     # Send the id on the TCP connection
@@ -60,7 +60,7 @@ while(1):
       }
       res = es.index(index="iot", doc_type='smart_building', body=doc)   # Index the document in elasticsearch
       print(res['created'])                                          # Print if indexed successfully
-      if(sensor.id==101):                           # Reset the sensor id and location when it reaches 100 sensors
-            sensor.id = 1                           # Reset sensor id
-            sensor.location = 1                  # Reset sensor location
+      if(sensor.id==301):                           # Reset the sensor id and location when it reaches 100 sensors
+            sensor.id = 201                           # Reset sensor id
+            sensor.location = 201                  # Reset sensor location
 s.close()
