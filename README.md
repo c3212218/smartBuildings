@@ -20,7 +20,7 @@ The kopf plugin can be found here:
 https://github.com/lmenezes/elasticsearch-kopf
 
 ## Instructions for setting up the pipeline
-1-	Download the Cloudera VM from one drive https://studentutsedu-my.sharepoint.com/:u:/g/personal/12532293_student_uts_edu_au/EUqYnb7DEtBDi9w35eSgkSsBlJjR6pSNPcZqZVpQRvsHIg?e=A5Q2Ik 
+1-	Download the Cloudera VM from one drive https://studentutsedu-my.sharepoint.com/:u:/g/personal/12532293_student_uts_edu_au/EQ7VwJhc_G1OnEl_H2qYjEABSibEX1S8xRf6lOiny5iVxg?e=aSdGr4 
 
 2-	The Password for the download is IoTSmartBuildings
 
